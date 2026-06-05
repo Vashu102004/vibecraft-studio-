@@ -1,177 +1,207 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function App() {
-  // UI State Management
   const [businessName, setBusinessName] = useState('Maa Rewa Auto Parts');
-  const [eventType, setEventType] = useState('Diwali Dhamaka Offer');
+  const [eventType, setEventType] = useState('Diwali Dhamaka');
   const [primaryColor, setPrimaryColor] = useState('#ff9800');
-  const [loading, setLoading] = useState(false);
+  
+  const [generating, setGenerating] = useState(false);
+  const [logs, setLogs] = useState([]);
+  const [showCanvas, setShowCanvas] = useState(true);
 
-  // VibeCraft Core Mock Engine (Same as Backend Logic)
   const [output, setOutput] = useState({
     brandVoice: 'Trustworthy, heavy-duty, customer-first, locally grounded.',
     regionalVibe: 'Perfect for central Indian commercial hubs like Indore.',
-    caption: `Shubh Diwali Dhamaka Offer Alert!\n\nApne business ko dijiye ek naya bharosa! Maa Rewa Auto Parts lekar aaya hai special offers aap sabhi ke liye. \n\n100% Genuine & Reliable Quality.\n\nAaj hi visit karein!`,
+    caption: `Shubh Diwali Dhamaka Alert!\n\nApne business ko dijiye ek naya bharosa! Maa Rewa Auto Parts lekar aaya hai special offers aap sabhi ke liye. \n\n100% Genuine & Reliable Quality.\n\nAaj hi visit karein!`,
     htmlTemplate: `
-<div style="font-family: 'Segoe UI', system-ui, sans-serif; padding: 35px; background: #ffffff; border-radius: 20px; text-align: center; max-width: 450px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); border: 2px solid #f0f0f0; margin: auto;">
-  <div style="height: 8px; background: linear-gradient(90deg, #ff9800, #ffeb3b); margin: -35px -35px 25px -35px; border-radius: 20px 20px 0 0;"></div>
-  <h2 style="color: #1a1a1a; font-size: 26px; margin-bottom: 5px; font-weight: 800;">Maa Rewa Auto Parts</h2>
-  <span style="font-size: 11px; text-transform: uppercase; color: #ff9800; font-weight: bold; letter-spacing: 2px; display: block; margin-bottom: 25px;">Perfect for central Indian commercial hubs like Indore.</span>
-  <div style="background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%); padding: 30px 20px; border-radius: 16px; margin-bottom: 25px; border: 1px solid #eef2f3;">
-    <h3 style="color: #ff9800; font-size: 24px; margin: 0 0 12px 0; font-weight: 700;">Diwali Dhamaka Offer</h3>
-    <p style="color: #555555; font-size: 14px; line-height: 1.6; margin: 0;">Experience premium tailored solution and exclusive discounts on our trusted catalog items.</p>
+<div style="font-family: 'Inter', system-ui, sans-serif; padding: 40px; background: linear-gradient(145deg, #ffffff, #f3f4f6); border-radius: 24px; text-align: center; max-width: 480px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); border: 1px solid rgba(255,152,0,0.3); margin: auto; position: relative; overflow: hidden;">
+  <div style="position: absolute; top: 0; left: 0; right: 0; height: 6px; background: linear-gradient(90deg, #ff9800, #111827);"></div>
+  <div style="width: 60px; height: 60px; background: rgba(255,152,0,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; border: 2px solid rgba(255,152,0,0.2);">
+    <span style="color: #ff9800; font-weight: 900; font-size: 24px;">MR</span>
   </div>
-  <div style="display: inline-block; background: #ff9800; color: #ffffff; padding: 14px 36px; font-size: 14px; font-weight: 700; border-radius: 50px; text-transform: uppercase;">Claim Offer Now</div>
+  <h2 style="color: #111827; font-size: 28px; margin-bottom: 8px; font-weight: 900; letter-spacing: -0.5px;">Maa Rewa Auto Parts</h2>
+  <span style="font-size: 12px; text-transform: uppercase; color: #ff9800; font-weight: 700; letter-spacing: 3px; display: block; margin-bottom: 30px;">Perfect for central Indian commercial hubs like Indore.</span>
+  
+  <div style="background: #ffffff; padding: 35px 25px; border-radius: 20px; margin-bottom: 30px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); border: 1px solid #f3f4f6;">
+    <h3 style="color: #ff9800; font-size: 22px; margin: 0 0 15px 0; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;">Diwali Dhamaka</h3>
+    <p style="color: #4b5563; font-size: 15px; line-height: 1.7; margin: 0; font-weight: 500;">Experience premium tailored solution and exclusive discounts on our trusted catalog items.</p>
+  </div>
+  
+  <button style="background: linear-gradient(135deg, #ff9800, #111827); color: #ffffff; padding: 16px 40px; font-size: 15px; font-weight: 800; border-radius: 50px; text-transform: uppercase; border: none; cursor: pointer; box-shadow: 0 10px 20px rgba(255,152,0,0.3); letter-spacing: 1px;">Claim Offer Now</button>
 </div>`
   });
 
-  // Handle Dynamic Generation Trigger
   const handleGenerate = (e) => {
     e.preventDefault();
-    setLoading(true);
+    setGenerating(true);
+    setShowCanvas(false);
+    setLogs([]);
 
-    // Dynamic generation simulation
-    setTimeout(() => {
-      let voice = 'Energetic, festive, welcoming, premium community feel.';
-      let vibe = 'Tailored for local high-street retail setups.';
-      
-      if (businessName.toLowerCase().includes('parts') || businessName.toLowerCase().includes('auto')) {
-        voice = 'Trustworthy, heavy-duty, customer-first, locally grounded.';
-        vibe = 'Perfect for central Indian commercial hubs like Indore.';
-      }
+    const steps = [
+      { text: "> Initializing Agentic Pipeline...", delay: 200 },
+      { text: `> Requesting tool: query_foundry_iq_knowledge("${businessName}")`, delay: 1000 },
+      { text: "[Foundry IQ] Connected to Enterprise Knowledge Graph.", delay: 1800 },
+      { text: "[Foundry IQ] Extracted regional insights: Central Indian commercial hub.", delay: 2600 },
+      { text: `> Requesting tool: generate_grounded_copy(theme: "${eventType}")`, delay: 3400 },
+      { text: "[Creative Agent] Synthesizing culturally aligned Hinglish text...", delay: 4200 },
+      { text: "> Requesting tool: render_css_canvas()", delay: 5000 },
+      { text: "[UI Agent] Compiling lightweight CSS layout...", delay: 5600 },
+      { text: "> Agentic workflow complete. Rendering Live Canvas.", delay: 6200 }
+    ];
 
-      const isFestive = eventType.toLowerCase().includes('diwali') || eventType.toLowerCase().includes('fest') || eventType.toLowerCase().includes('offer');
-      const captionText = isFestive
-        ? `Shubh ${eventType} Alert!\n\nApne business ko dijiye ek naya bharosa! ${businessName} lekar aaya hai special offers aap sabhi ke liye. \n\n100% Genuine & Reliable Quality.\n\nAaj hi visit karein!`
-        : `Mega Celebration Deal!\n\nGreat news from ${businessName}! We are launching our mega ${eventType} just for you.\n\nLimited Time Offer! Don't miss out.`;
+    let currentDelay = 0;
+    steps.forEach((step, index) => {
+      currentDelay = step.delay;
+      setTimeout(() => {
+        setLogs(prev => [...prev, step.text]);
+        if (index === steps.length - 1) {
+          finalizeGeneration();
+        }
+      }, step.delay);
+    });
+  };
 
-      const templateHtml = `
-<div style="font-family: 'Segoe UI', system-ui, sans-serif; padding: 35px; background: #ffffff; border-radius: 20px; text-align: center; max-width: 450px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); border: 2px solid #f0f0f0; margin: auto;">
-  <div style="height: 8px; background: linear-gradient(90deg, ${primaryColor}, #ffeb3b); margin: -35px -35px 25px -35px; border-radius: 20px 20px 0 0;"></div>
-  <h2 style="color: #1a1a1a; font-size: 26px; margin-bottom: 5px; font-weight: 800;">${businessName}</h2>
-  <span style="font-size: 11px; text-transform: uppercase; color: ${primaryColor}; font-weight: bold; letter-spacing: 2px; display: block; margin-bottom: 25px;">${vibe}</span>
-  <div style="background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%); padding: 30px 20px; border-radius: 16px; margin-bottom: 25px; border: 1px solid #eef2f3;">
-    <h3 style="color: ${primaryColor}; font-size: 24px; margin: 0 0 12px 0; font-weight: 700; text-transform: capitalize;">${eventType}</h3>
-    <p style="color: #555555; font-size: 14px; line-height: 1.6; margin: 0;">Experience premium tailored solution and exclusive discounts on our trusted catalog items.</p>
-  </div>
-  <div style="display: inline-block; background: ${primaryColor}; color: #ffffff; padding: 14px 36px; font-size: 14px; font-weight: 700; border-radius: 50px; text-transform: uppercase;">Claim Offer Now</div>
+  const finalizeGeneration = () => {
+    let voice = 'Energetic, festive, welcoming, premium community feel.';
+    let vibe = 'Tailored for local high-street retail setups.';
+    
+    if (businessName.toLowerCase().includes('parts') || businessName.toLowerCase().includes('auto')) {
+      voice = 'Trustworthy, heavy-duty, customer-first, locally grounded.';
+      vibe = 'Perfect for central Indian commercial hubs like Indore.';
+    }
+
+    const initials = businessName.split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase();
+    const isFestive = eventType.toLowerCase().includes('diwali') || eventType.toLowerCase().includes('fest') || eventType.toLowerCase().includes('offer');
+    
+    const captionText = isFestive
+      ? `Shubh ${eventType} Alert!\n\nApne business ko dijiye ek naya bharosa! ${businessName} lekar aaya hai special offers aap sabhi ke liye. \n\n100% Genuine & Reliable Quality.\n\nAaj hi visit karein!`
+      : `Mega Celebration Deal!\n\nGreat news from ${businessName}! We are launching our mega ${eventType} just for you.\n\nLimited Time Offer! Don't miss out.`;
+
+    const templateHtml = `
+<div style="font-family: 'Inter', system-ui, sans-serif; padding: 40px; background: linear-gradient(145deg, #ffffff, #f3f4f6); border-radius: 24px; text-align: center; max-width: 480px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); border: 1px solid ${primaryColor}40; margin: auto; position: relative; overflow: hidden;">
+<div style="position: absolute; top: 0; left: 0; right: 0; height: 6px; background: linear-gradient(90deg, ${primaryColor}, #111827);"></div>
+<div style="width: 60px; height: 60px; background: ${primaryColor}15; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto; border: 2px solid ${primaryColor}30;">
+  <span style="color: ${primaryColor}; font-weight: 900; font-size: 24px;">${initials}</span>
+</div>
+<h2 style="color: #111827; font-size: 28px; margin-bottom: 8px; font-weight: 900; letter-spacing: -0.5px;">${businessName}</h2>
+<span style="font-size: 12px; text-transform: uppercase; color: ${primaryColor}; font-weight: 700; letter-spacing: 3px; display: block; margin-bottom: 30px;">${vibe}</span>
+
+<div style="background: #ffffff; padding: 35px 25px; border-radius: 20px; margin-bottom: 30px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); border: 1px solid #f3f4f6;">
+  <h3 style="color: ${primaryColor}; font-size: 22px; margin: 0 0 15px 0; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;">${eventType}</h3>
+  <p style="color: #4b5563; font-size: 15px; line-height: 1.7; margin: 0; font-weight: 500;">Experience premium tailored solution and exclusive discounts on our trusted catalog items.</p>
+</div>
+
+<button style="background: linear-gradient(135deg, ${primaryColor}, #111827); color: #ffffff; padding: 16px 40px; font-size: 15px; font-weight: 800; border-radius: 50px; text-transform: uppercase; border: none; cursor: pointer; box-shadow: 0 10px 20px ${primaryColor}40; letter-spacing: 1px;">Claim Offer Now</button>
 </div>`;
 
-      setOutput({ brandVoice: voice, regionalVibe: vibe, caption: captionText, htmlTemplate: templateHtml });
-      setLoading(false);
-    }, 800);
+    setOutput({ brandVoice: voice, regionalVibe: vibe, caption: captionText, htmlTemplate: templateHtml });
+    setShowCanvas(true);
+    setGenerating(false);
   };
 
   return (
-    <div className="min-h-screen bg-[#0b0f19] text-gray-100 flex flex-col font-sans selection:bg-indigo-500 selection:text-white">
-      {/* Premium Glassmorphic Header */}
-      <header className="border-b border-gray-800 bg-[#0f172a]/60 backdrop-blur-md sticky top-0 z-50 px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center space-x-3">
-          <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center shadow-lg shadow-indigo-500/20">
-            <span className="text-white font-black text-sm">V</span>
+    <div className="min-h-screen bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#0f172a] via-[#020617] to-black text-gray-100 flex flex-col font-sans selection:bg-cyan-500 selection:text-white">
+      {/* Header */}
+      <header className="border-b border-white/5 bg-black/40 backdrop-blur-xl sticky top-0 z-50 px-8 py-5 flex items-center justify-between shadow-2xl">
+        <div className="flex items-center space-x-4">
+          <div className="h-10 w-10 rounded-xl bg-gradient-to-tr from-cyan-500 via-blue-500 to-indigo-600 flex items-center justify-center shadow-[0_0_20px_rgba(6,182,212,0.4)] border border-white/10">
+            <span className="text-white font-black text-xl tracking-tighter">V</span>
           </div>
           <div>
-            <h1 className="text-lg font-bold tracking-tight bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">VibeCraft Studio</h1>
-            <p className="text-[10px] text-indigo-400 font-semibold tracking-widest uppercase">Creative Apps Ad-Layer</p>
+            <h1 className="text-xl font-extrabold tracking-tight bg-gradient-to-r from-white via-cyan-100 to-blue-200 bg-clip-text text-transparent">VibeCraft Agent Studio</h1>
+            <p className="text-[10px] text-cyan-400/80 font-bold tracking-[0.2em] uppercase mt-0.5">Foundry IQ Powered Workspace</p>
           </div>
         </div>
-        <div className="flex items-center space-x-2">
-          <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span className="text-xs font-medium text-gray-400 tracking-wider">MCP Foundry IQ Active</span>
+        <div className="flex items-center space-x-3 bg-white/5 px-4 py-2 rounded-full border border-white/5">
+          <span className="relative flex h-2.5 w-2.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.8)]"></span>
+          </span>
+          <span className="text-xs font-semibold text-gray-300 tracking-wider uppercase">Microsoft Foundry IQ : Connected</span>
         </div>
       </header>
 
-      {/* Main Studio Container */}
-      <main className="flex-1 max-w-7xl w-full mx-auto p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 overflow-hidden">
-        {/* Left Side: Parameters Form Panel */}
-        <section className="lg:col-span-4 bg-[#111827]/40 border border-gray-800/80 rounded-2xl p-6 backdrop-blur-sm flex flex-col justify-between">
-          <form onSubmit={handleGenerate} className="space-y-5">
-            <div>
-              <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Business / Brand Name</label>
-              <input 
-                type="text" 
-                value={businessName}
-                onChange={(e) => setBusinessName(e.target.value)}
-                className="w-full bg-[#1f2937]/50 border border-gray-700/60 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-indigo-500 transition-all text-white placeholder-gray-500"
-                placeholder="e.g. Maa Rewa Auto Parts"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Campaign / Event Theme</label>
-              <input 
-                type="text" 
-                value={eventType}
-                onChange={(e) => setEventType(e.target.value)}
-                className="w-full bg-[#1f2937]/50 border border-gray-700/60 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-indigo-500 transition-all text-white placeholder-gray-500"
-                placeholder="e.g. Diwali Dhamaka, Monsoon Sale"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Brand Identity Color</label>
-              <div className="flex items-center space-x-3">
-                <input 
-                  type="color" 
-                  value={primaryColor}
-                  onChange={(e) => setPrimaryColor(e.target.value)}
-                  className="h-10 w-12 bg-transparent border-0 cursor-pointer rounded"
-                />
-                <input 
-                  type="text" 
-                  value={primaryColor}
-                  onChange={(e) => setPrimaryColor(e.target.value)}
-                  className="bg-[#1f2937]/50 border border-gray-700/60 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-indigo-500 text-gray-300 font-mono"
-                />
+      {/* Main Grid */}
+      <main className="flex-1 max-w-[90rem] w-full mx-auto p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 overflow-hidden">
+        
+        {/* Left Form */}
+        <section className="lg:col-span-3 flex flex-col gap-6">
+          <div className="bg-white/[0.02] border border-white/10 rounded-3xl p-6 backdrop-blur-md shadow-2xl relative overflow-hidden group">
+            <div className="absolute top-0 right-0 -mr-16 -mt-16 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl group-hover:bg-cyan-500/20 transition-all duration-700"></div>
+            <h2 className="text-sm font-bold text-white mb-5 flex items-center relative z-10">
+              <span className="w-1.5 h-4 bg-cyan-500 rounded-full mr-3"></span>
+              Agent Parameters
+            </h2>
+            <form onSubmit={handleGenerate} className="space-y-5 relative z-10">
+              <div>
+                <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Business Name</label>
+                <input type="text" value={businessName} onChange={(e) => setBusinessName(e.target.value)} className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 text-white placeholder-gray-600 transition-colors shadow-inner" required />
               </div>
-            </div>
-
-            <button 
-              type="submit" 
-              disabled={loading}
-              className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 active:scale-[0.98] text-white text-sm font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-indigo-600/10 transition-all flex items-center justify-center space-x-2 disabled:opacity-50"
-            >
-              {loading ? (
-                <span className="border-2 border-white/30 border-t-white h-4 w-4 rounded-full animate-spin"></span>
-              ) : (
-                <span>Generate Creative Layer</span>
-              )}
-            </button>
-          </form>
-
-          {/* Core Grounding Metadata Monitor */}
-          <div className="mt-8 pt-5 border-t border-gray-800/80 space-y-3">
-            <span className="text-[10px] uppercase tracking-widest text-indigo-400 font-bold block">Foundry IQ Metadata Monitor</span>
-            <div className="bg-[#030712]/50 rounded-xl p-3 border border-gray-800 text-xs font-mono space-y-2 text-gray-400">
-              <p><span className="text-purple-400">brandVoice:</span> "{output.brandVoice}"</p>
-              <p><span className="text-purple-400">targetRegion:</span> "{output.regionalVibe}"</p>
-            </div>
+              <div>
+                <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Campaign Theme</label>
+                <input type="text" value={eventType} onChange={(e) => setEventType(e.target.value)} className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 text-white placeholder-gray-600 transition-colors shadow-inner" required />
+              </div>
+              <div>
+                <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Brand Color</label>
+                <div className="flex space-x-3 bg-black/40 border border-white/10 rounded-xl p-2 focus-within:border-cyan-500 focus-within:ring-1 focus-within:ring-cyan-500 transition-all">
+                  <input type="color" value={primaryColor} onChange={(e) => setPrimaryColor(e.target.value)} className="h-8 w-10 rounded cursor-pointer bg-transparent border-none p-0" />
+                  <input type="text" value={primaryColor} onChange={(e) => setPrimaryColor(e.target.value)} className="flex-1 bg-transparent border-none px-2 py-1 text-sm focus:outline-none text-white font-mono" />
+                </div>
+              </div>
+              <button type="submit" disabled={generating} className="w-full relative overflow-hidden group/btn rounded-xl disabled:opacity-80 transition-all hover:scale-[1.02] active:scale-[0.98] mt-6">
+                <span className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-600 opacity-80 group-hover/btn:opacity-100 transition-opacity"></span>
+                <div className="relative px-4 py-3.5 text-sm font-bold text-white flex items-center justify-center space-x-3 w-full h-full">
+                  {generating ? (
+                    <span className="tracking-wide">Agent Orchestrating...</span>
+                  ) : (
+                    <span className="tracking-wide">Launch Agent Workflow</span>
+                  )}
+                </div>
+              </button>
+            </form>
           </div>
         </section>
 
-        {/* Right Side: Split Previews Container */}
-        <section className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6 overflow-hidden">
-          {/* Ad Copy Pane */}
-          <div className="bg-[#111827]/40 border border-gray-800/80 rounded-2xl p-5 backdrop-blur-sm flex flex-col">
-            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3 block">Grounded Marketing Copy</span>
-            <textarea 
-              readOnly 
-              value={output.caption}
-              className="w-full flex-1 bg-[#030712]/40 border border-gray-800 rounded-xl p-4 text-sm text-gray-300 font-sans leading-relaxed resize-none focus:outline-none focus:border-gray-800"
-            />
+        {/* Center Terminal & Copy */}
+        <section className="lg:col-span-4 flex flex-col gap-6 h-[calc(100vh-9rem)]">
+          {/* Agentic Workflow Terminal */}
+          <div className="bg-[#050505] border border-white/10 rounded-3xl p-5 shadow-2xl flex-1 flex flex-col relative overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-30"></div>
+            <h2 className="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-4 flex justify-between items-center z-10">
+              <span>Agentic Workflow Logs</span>
+              {generating && <span className="flex h-2 w-2 relative"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span><span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span></span>}
+            </h2>
+            <div className="flex-1 overflow-y-auto font-mono text-[11px] leading-relaxed space-y-2.5 text-gray-400 p-2 z-10">
+              {logs.length === 0 && !generating && (
+                <div className="text-gray-600 italic">Awaiting workflow initialization...</div>
+              )}
+              {logs.map((log, i) => (
+                <div key={i} className={`transition-opacity duration-300 ${log.includes('Foundry IQ') ? 'text-emerald-400' : log.includes('Agent') ? 'text-purple-400' : 'text-cyan-300'}`}>
+                  {log}
+                </div>
+              ))}
+              {generating && <div className="animate-pulse text-gray-600 mt-2">_</div>}
+            </div>
           </div>
 
-          {/* Design Live Canvas Pane */}
-          <div className="bg-[#111827]/40 border border-gray-800/80 rounded-2xl p-5 backdrop-blur-sm flex flex-col">
-            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3 block">Live Canvas Sandbox Preview</span>
-            <div className="w-full flex-1 bg-[#030712]/30 border border-gray-800/60 rounded-xl p-4 flex items-center justify-center overflow-auto">
-              <div 
-                className="w-full h-full flex items-center justify-center transition-all duration-300 transform scale-95"
-                dangerouslySetInnerHTML={{ __html: output.htmlTemplate }} 
-              />
-            </div>
+          {/* Ad Copy */}
+          <div className="bg-white/[0.02] border border-white/10 rounded-3xl p-5 shadow-2xl shrink-0 h-48 flex flex-col">
+            <h2 className="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-3">Synthesized Copy</h2>
+            <textarea readOnly value={output.caption} className={`w-full flex-1 bg-black/40 shadow-inner border border-white/5 rounded-xl p-4 text-xs text-gray-300 font-medium resize-none focus:outline-none transition-all duration-700 ${showCanvas ? 'opacity-100 blur-0' : 'opacity-30 blur-sm'}`} />
+          </div>
+        </section>
+
+        {/* Right Canvas */}
+        <section className="lg:col-span-5 bg-white/[0.02] border border-white/10 rounded-3xl p-6 backdrop-blur-md shadow-2xl flex flex-col relative overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-500/5 rounded-full blur-[100px] pointer-events-none"></div>
+          
+          <h2 className="text-sm font-bold text-white mb-4 flex items-center justify-between relative z-10">
+            <span className="flex items-center"><span className="w-1.5 h-4 bg-emerald-500 rounded-full mr-3"></span>Live Layout Render</span>
+            <span className="text-[10px] font-bold text-emerald-500 bg-emerald-500/10 px-2 py-1 rounded-md border border-emerald-500/20">Asset-Free CSS</span>
+          </h2>
+          
+          <div className="w-full flex-1 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] bg-[#050505] border border-white/5 rounded-2xl p-6 flex items-center justify-center overflow-auto shadow-inner relative z-10">
+            <div className={`w-full h-full flex items-center justify-center transition-all duration-1000 transform ${showCanvas ? 'scale-100 opacity-100 blur-0 translate-y-0' : 'scale-95 opacity-0 blur-md translate-y-4'}`} dangerouslySetInnerHTML={{ __html: output.htmlTemplate }} />
           </div>
         </section>
       </main>

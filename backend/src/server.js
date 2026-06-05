@@ -1,7 +1,7 @@
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
-import { handleLayoutGeneration } from "./tools/designTools.js";
+import { queryFoundryIQKnowledge, generateGroundedCopy, renderCssCanvas } from "./tools/designTools.js";
 import dotenv from "dotenv";
 
 // Load environment variables (.env file se keys read karne ke liye)
@@ -10,8 +10,8 @@ dotenv.config();
 // Initialize VibeCraft MCP Server
 const server = new Server(
   { 
-    name: "vibecraft-design-layer", 
-    version: "1.0.0" 
+    name: "vibecraft-agentic-layer", 
+    version: "2.0.0" 
   },
   { 
     capabilities: { 
@@ -22,67 +22,82 @@ const server = new Server(
 
 /**
  * 1. Tools Registration
- * Yeh hamare unique dynamic content aur design tool ko GitHub Copilot ecosystem mein expose karega.
+ * Expanding to a true Agentic Suite for Microsoft Agents League Hackathon.
  */
 server.setRequestHandler(ListToolsRequestSchema, async () => {
   return {
     tools: [
       {
-        name: "generate_design_layout",
-        description: "Generates creative HTML/CSS layouts and culturally grounded Hinglish ad copy for small businesses based on Microsoft Foundry IQ context.",
+        name: "query_foundry_iq_knowledge",
+        description: "Simulates querying Microsoft Foundry IQ for local market trends, demographic data, and enterprise brand voice guidelines for a specific business.",
         inputSchema: {
           type: "object",
           properties: {
-            businessName: { 
-              type: "string", 
-              description: "Name of the business or shop (e.g., Maa Rewa Auto Parts, Royal Cafe)" 
-            },
-            eventType: { 
-              type: "string", 
-              description: "The event theme or festival offer (e.g., Diwali Dhamaka, Grand Opening, Monsoon Sale)" 
-            },
-            primaryColor: { 
-              type: "string", 
-              description: "Optional theme Hex code for branding (e.g., #ff9800 for gold/orange vibe)" 
-            }
+            businessName: { type: "string", description: "Name of the business (e.g., Maa Rewa Auto Parts)" }
+          },
+          required: ["businessName"],
+        },
+      },
+      {
+        name: "generate_grounded_copy",
+        description: "Generates creative Hinglish marketing copy strictly grounded in the brandVoice retrieved from Foundry IQ.",
+        inputSchema: {
+          type: "object",
+          properties: {
+            businessName: { type: "string" },
+            eventType: { type: "string", description: "The event theme (e.g., Diwali Dhamaka)" },
+            brandVoice: { type: "string", description: "The brand voice returned by query_foundry_iq_knowledge" }
+          },
+          required: ["businessName", "eventType", "brandVoice"],
+        },
+      },
+      {
+        name: "render_css_canvas",
+        description: "Renders the final premium, asset-free HTML/CSS component layout using the context data.",
+        inputSchema: {
+          type: "object",
+          properties: {
+            businessName: { type: "string" },
+            eventType: { type: "string" },
+            primaryColor: { type: "string", description: "Hex color code" },
+            regionalVibe: { type: "string", description: "The regional vibe returned by query_foundry_iq_knowledge" }
           },
           required: ["businessName", "eventType"],
         },
-      },
+      }
     ],
   };
 });
 
 /**
  * 2. Tool Execution Link
- * Jab developer VS Code Chat mein input dega, toh yeh requests seedhe 'designTools.js' ke execution layer par jayengi.
  */
 server.setRequestHandler(CallToolRequestSchema, async (request) => {
-  if (request.params.name === "generate_design_layout") {
-    try {
-      return await handleLayoutGeneration(request.params.arguments);
-    } catch (error) {
-      return {
-        content: [
-          {
-            type: "text",
-            text: `❌ Error executing VibeCraft tool: ${error.message}`,
-          },
-        ],
-      };
+  try {
+    switch (request.params.name) {
+      case "query_foundry_iq_knowledge":
+        return await queryFoundryIQKnowledge(request.params.arguments);
+      case "generate_grounded_copy":
+        return await generateGroundedCopy(request.params.arguments);
+      case "render_css_canvas":
+        return await renderCssCanvas(request.params.arguments);
+      default:
+        throw new Error("Requested tool not found on VibeCraft Agentic Server.");
     }
+  } catch (error) {
+    return {
+      content: [{ type: "text", text: `❌ Agent Execution Error: ${error.message}` }],
+    };
   }
-  throw new Error("Requested tool not found on VibeCraft server.");
 });
 
 /**
  * 3. Standard I/O Transport Connect
- * GitHub Copilot stdio channels ke through hi background process runs ko manage karta hai.
  */
 async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error("🚀 VibeCraft MCP Server with Foundry IQ is successfully running on stdio!");
+  console.error("🚀 VibeCraft Agentic MCP Server (Foundry IQ Enabled) is fully operational on stdio!");
 }
 
 main().catch((error) => {
