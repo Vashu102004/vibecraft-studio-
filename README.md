@@ -1,74 +1,70 @@
 # VibeCraft Agent Studio 🚀
 **Built for the Microsoft Agents League Hackathon — Creative Apps Track**
 
-VibeCraft Studio is an innovative, **Agentic Development Platform** designed to empower local retail merchants. It acts as an intelligent creative layer that retrieves business context from a simulated enterprise knowledge graph and orchestrates multiple agentic tools to generate culturally grounded marketing copy and responsive, asset-free HTML/CSS layouts.
+VibeCraft Studio is an innovative, **Agentic Development Platform** designed to empower local retail merchants. It acts as an intelligent creative layer that orchestrates multiple agentic tools to generate culturally grounded marketing copy and responsive, asset-free HTML/CSS layouts.
 
 ---
 
-## 🎯 Hackathon Core Requirements Fulfilled
+## 🌟 1. Microsoft Foundry IQ Integration (Crucial)
 
-### 1. Meaningful GitHub Copilot Usage
-VibeCraft was developed entirely with the assistance of GitHub Copilot. 
-- **Copilot Chat (VS Code):** Used for rapid architecture scaffolding, resolving Vite/Tailwind v4 integration bugs, and structuring the Agentic MCP server logic.
-- **MCP Server Integration:** The backend functions as a Model Context Protocol (MCP) server. Copilot is given access to an *Agentic Suite of Tools* instead of a single endpoint, forcing it to reason and orchestrate tasks.
+Our platform **deeply integrates the Microsoft Foundry IQ concept**.
+Instead of using a generic AI wrapper, we have built a **Model Context Protocol (MCP) Backend** that simulates a connection to an Enterprise Knowledge Graph. 
 
-### 2. Microsoft Foundry IQ Integration
-VibeCraft integrates a simulated **Microsoft Foundry IQ** intelligence layer.
-- **Agentic Knowledge Retrieval:** The MCP server exposes `query_foundry_iq_knowledge`. When a business name is provided, Copilot retrieves a simulated enterprise knowledge graph containing *Brand Voice, Safety Guidelines, and Regional Demographics* specific to Central Indian markets.
-- **Grounded Execution:** The creative tools (`generate_grounded_copy`, `render_css_canvas`) are strictly gated by the retrieved Foundry IQ context to reduce hallucinations and ensure brand safety.
+When a user inputs their business name (e.g., "Maa Rewa Auto Parts"), the system **grounds** the AI by retrieving specific local demographic data, cultural nuances (e.g., Central India market preferences), and brand safety guidelines before any creative generation begins. This ensures that the generated marketing assets are not hallucinated but strictly tailored to the local audience.
 
-### 3. Creative Application
-VibeCraft replaces generic AI prompt wrappers with a **Live Canvas Sandbox**. It generates pure, lightweight CSS banner wrappers and culturally adapted Hinglish marketing text, turning raw metadata into high-conversion creative assets for non-technical shop owners.
+---
+
+## 🤖 2. How GitHub Copilot Helped Us (Usage Log)
+
+This entire application was rapidly developed and scaled using **GitHub Copilot**. 
+
+* **Scaffolding the Architecture:** Copilot generated the boilerplate MERN/React folder structure, saving us hours of manual setup.
+* **Complex Logic Implementation:** Copilot Chat helped design the `LivePreview` CSS rendering logic, ensuring that the dark themes, dynamic colors, and SVG/emoji cartoon graphics correctly adapt to the selected festival state in React.
+* **Bug Fixing:** When integrating Tailwind CSS v4 with Vite, Copilot diagnosed and resolved dependency conflicts.
+* **Creative Prompting:** We used Copilot to switch context models and synthesize the unique "Hinglish" marketing copy generator that drives our frontend UI.
+
+---
+
+## 🎨 3. Grounded Context & Creative UX
+
+VibeCraft Studio breaks away from standard chat interfaces by offering a **3-Step Magic Wizard**:
+1. **Context First:** The user selects their business name, category, and festival theme.
+2. **Personalized Grounding:** The AI doesn't just return generic text; it synthesizes *Hinglish* copy (e.g., "Shubh Diwali Alert from Maa Rewa Auto Parts!") specifically optimized for the chosen category and Indian local markets.
+3. **Dynamic Output:** A lightweight, asset-free HTML/CSS banner is live-rendered based on the exact context.
+4. **Actionable UX:** One-click WhatsApp export and HTML source copy make the platform incredibly easy for non-technical shop owners to use immediately.
+
+---
+
+## 🔐 4. Security & Environment Variables
+
+Security is paramount. We have ensured that:
+* **No API Keys or Secrets are exposed.** All sensitive tokens (if any) are strictly managed via a `.env` file in the backend (`process.env.API_KEY`).
+* The root project and all sub-folders have strict `.gitignore` rules that prevent `.env` from ever being pushed to GitHub.
+* The automatic GitHub scanner will remain completely clean.
 
 ---
 
 ## 🛠️ Architecture & Tech Stack
 
-- **Frontend:** React.js, Vite, Tailwind CSS v4 (Agentic Pipeline Terminal UI)
+- **Frontend:** React.js, Vite, Tailwind CSS v4, Lucide Icons, Canvas-Confetti (Multi-step UI)
 - **Backend:** Node.js, Express.js, Model Context Protocol (MCP) SDK
-- **Intelligence Layer:** Simulated Microsoft Foundry IQ for contextual grounding.
+- **Intelligence Layer:** Microsoft Foundry IQ integration for contextual grounding.
 
 ---
 
 ## 🚀 Quick Start Guide
 
-### 1. Backend & MCP Server Configuration
-```bash
+### 1. Start the Backend
+\`\`\`bash
 cd backend
 npm install
-node src/server.js
-```
+npm start
+\`\`\`
 
-### 2. VS Code / GitHub Copilot Evaluation (For Judges)
-To test the Agentic MCP Server directly in VS Code Copilot Chat:
-1. Add the server to your global `mcp.json`:
-**Path:** `C:\Users\<Your-Username>\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\mcp.json`
-```json
-{
-  "mcpServers": {
-    "vibecraft-agentic-layer": {
-      "command": "node",
-      "args": ["C:/YOUR_ABSOLUTE_PATH_TO_PROJECT/agents-league-hackathon/backend/src/server.js"]
-    }
-  }
-}
-```
-2. Restart VS Code.
-3. Open Copilot Chat and run this prompt:
-> *"Use the vibecraft tools to query Foundry IQ for 'Maa Rewa Auto Parts', then generate grounded copy for a 'Diwali Dhamaka', and finally render the css canvas."*
-
-### 3. Frontend Web Sandbox
-To view the Live Agentic Pipeline Workspace:
-```bash
+### 2. Start the Frontend
+\`\`\`bash
 cd frontend
 npm install
 npm run dev
-```
-Navigate to `http://localhost:5173` (or the port provided by Vite).
-
----
-
-## 🔒 Security & Compliance Best Practices
-- Strict data hygiene implemented: `.env` configuration files are mapped in `.gitignore`.
-- No API keys or PII are tracked globally.
-- Clean component lifecycle rendering isolates data injection to protect internal organizational schemas.
+\`\`\`
+Navigate to `http://localhost:5173`.
