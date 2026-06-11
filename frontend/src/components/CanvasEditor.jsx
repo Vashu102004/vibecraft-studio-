@@ -168,23 +168,25 @@ export default function CanvasEditor({ initialData = {} }) {
     }
   ]);
 
+  const safeFestival = FESTIVAL_REGISTRY[selectedFestival] ? selectedFestival : 'Diwali';
+
   // Sync active canvas when festival layout shifts dynamically
   useEffect(() => {
     setLayers(prev => prev.map(layer => {
       if (layer.id === 'festive-heading') {
         return {
           ...layer,
-          content: FESTIVAL_REGISTRY[selectedFestival].title,
-          color: FESTIVAL_REGISTRY[selectedFestival].textColor,
-          fontFamily: FESTIVAL_REGISTRY[selectedFestival].font
+          content: FESTIVAL_REGISTRY[safeFestival].title,
+          color: FESTIVAL_REGISTRY[safeFestival].textColor,
+          fontFamily: FESTIVAL_REGISTRY[safeFestival].font
         };
       }
       if (layer.id === 'emoji-asset-pack') {
-        return { ...layer, content: FESTIVAL_REGISTRY[selectedFestival].emojis.join(' ') };
+        return { ...layer, content: FESTIVAL_REGISTRY[safeFestival].emojis.join(' ') };
       }
       return layer;
     }));
-  }, [selectedFestival]);
+  }, [safeFestival]);
 
   const handleSemanticReflow = (id, newX, newY, newWidth = null, newHeight = null) => {
     setLayers(prevLayers => {
@@ -232,7 +234,7 @@ export default function CanvasEditor({ initialData = {} }) {
           cacheBust: true,
         });
         const link = document.createElement('a');
-        link.download = `VibeCraft_${selectedFestival}_Banner.png`;
+        link.download = `VibeCraft_${safeFestival}_Banner.png`;
         link.href = dataUrl;
         link.click();
       } catch (error) {
@@ -266,7 +268,7 @@ export default function CanvasEditor({ initialData = {} }) {
           <div className="flex items-center gap-2 bg-black/40 px-4 py-2 rounded-xl border border-white/10 hover:border-indigo-500/50 transition-colors">
             <Palette size={16} className="text-indigo-400" />
             <select 
-              value={selectedFestival} 
+              value={safeFestival} 
               onChange={(e) => setSelectedFestival(e.target.value)}
               className="bg-transparent text-sm focus:outline-none text-slate-200 font-bold cursor-pointer"
             >
@@ -451,7 +453,7 @@ export default function CanvasEditor({ initialData = {} }) {
               id="vibecraft-render-core"
               onClick={() => setActiveLayerId(null)}
               style={{ 
-                background: FESTIVAL_REGISTRY[selectedFestival].gradient,
+                background: FESTIVAL_REGISTRY[safeFestival].gradient,
                 width: '1080px', // Standard 1:1 Instagram Post Size Scaled
                 height: '1080px',
                 transform: 'scale(0.55)', // Scale down for view
