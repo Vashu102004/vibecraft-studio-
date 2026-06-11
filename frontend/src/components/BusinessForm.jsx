@@ -1,7 +1,8 @@
-import React from 'react';
-import { ArrowRight, ArrowLeft, Store, Calendar, Palette, Briefcase } from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowRight, ArrowLeft, Store, Calendar, Palette, Briefcase, Loader2 } from 'lucide-react';
 
 export default function BusinessForm({ formData, setFormData, onNext, onBack }) {
+  const [isLoading, setIsLoading] = useState(false);
   const businessNames = [
     '', 'Maa Rewa Auto Parts', 'Sharma Sweets & Namkeen', 'Verma Electronics', 'Gupta General Store', 'Royal Fashion Hub',
     'Shri Ram Cloth Market', 'Balaji Mobile Shop', 'Lakshmi Jewellers', 'Aggarwal Pharmacy', 'Yadav Dairy & Sweets',
@@ -40,10 +41,26 @@ export default function BusinessForm({ formData, setFormData, onNext, onBack }) 
     { name: 'Charcoal Black', hex: '#333333' }
   ];
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formData.businessName && formData.category && formData.festival) {
+    if (!formData.businessName || !formData.category || !formData.festival) return;
+
+    setIsLoading(true);
+    try {
+      const response = await fetch('http://localhost:3000/api/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+      if (!response.ok) throw new Error('API Error');
+      const data = await response.json();
+      setFormData({ ...formData, generatedText: data.text });
       onNext();
+    } catch (error) {
+      console.error(error);
+      alert('Backend Error! Ensure the backend is running.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -146,10 +163,14 @@ export default function BusinessForm({ formData, setFormData, onNext, onBack }) 
             </button>
             <button 
               type="submit"
-              disabled={!formData.businessName || !formData.category || !formData.festival}
+              disabled={!formData.businessName || !formData.category || !formData.festival || isLoading}
               className="px-8 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-cyan-500 to-blue-600 hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100 flex items-center shadow-lg shadow-cyan-500/20"
             >
-              Generate Magic <ArrowRight className="w-4 h-4 ml-2" />
+              {isLoading ? (
+                <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Generating AI Text...</>
+              ) : (
+                <>Generate Magic <ArrowRight className="w-4 h-4 ml-2" /></>
+              )}
             </button>
           </div>
         </form>
