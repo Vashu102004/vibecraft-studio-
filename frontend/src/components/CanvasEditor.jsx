@@ -11,6 +11,7 @@ import {
 const FESTIVAL_REGISTRY = {
   Diwali: {
     title: "Shubh Deepawali Special",
+    quote: "May the divine light of Diwali bring peace, prosperity, and happiness to your life.",
     gradient: "linear-gradient(135deg, #0f172a 0%, #3b0764 50%, #1e1b4b 100%)",
     bgImage: "https://images.unsplash.com/photo-1542157585-ef208ce528f4?auto=format&fit=crop&w=1080&q=80",
     textColor: "#fcd34d",
@@ -20,6 +21,7 @@ const FESTIVAL_REGISTRY = {
   },
   Holi: {
     title: "Holi Hungama Dhamaka",
+    quote: "Wishing you a colorful, joyous, and vibrant Holi filled with love and laughter!",
     gradient: "linear-gradient(135deg, #db2777 0%, #9333ea 50%, #f59e0b 100%)",
     bgImage: "https://images.unsplash.com/photo-1554032115-3841c1921319?auto=format&fit=crop&w=1080&q=80",
     textColor: "#ffffff",
@@ -29,6 +31,7 @@ const FESTIVAL_REGISTRY = {
   },
   Eid: {
     title: "Eid Mubarak Mega Sale",
+    quote: "May Allah bless your life with joy, prosperity, and peace. Eid Mubarak!",
     gradient: "linear-gradient(135deg, #064e3b 0%, #022c22 60%, #115e59 100%)",
     bgImage: "https://images.unsplash.com/photo-1564507004663-b6dfb3c824d5?auto=format&fit=crop&w=1080&q=80",
     textColor: "#fef08a",
@@ -38,6 +41,7 @@ const FESTIVAL_REGISTRY = {
   },
   Navratri: {
     title: "Dandiya Beats Utsav",
+    quote: "Let the divine blessings of Maa Durga bring you strength and good fortune.",
     gradient: "linear-gradient(135deg, #1e3a8a 0%, #c2410c 70%, #7c2d12 100%)",
     bgImage: "https://images.unsplash.com/photo-1600085811342-9ee684176cc3?auto=format&fit=crop&w=1080&q=80",
     textColor: "#fdba74",
@@ -47,6 +51,7 @@ const FESTIVAL_REGISTRY = {
   },
   RakshaBandhan: {
     title: "Rakhi Special Bandhan Offers",
+    quote: "Celebrating the unbreakable bond of love and protection. Happy Raksha Bandhan!",
     gradient: "linear-gradient(135deg, #881337 0%, #4c0519 60%, #9d174d 100%)",
     bgImage: "https://images.unsplash.com/photo-1596489376483-e18e88e235e1?auto=format&fit=crop&w=1080&q=80",
     textColor: "#fce7f3",
@@ -56,6 +61,7 @@ const FESTIVAL_REGISTRY = {
   },
   GaneshChaturthi: {
     title: "Ganesh Utsav Maha Sale",
+    quote: "May Lord Ganesha remove all obstacles and bless you with wisdom and success.",
     gradient: "linear-gradient(135deg, #b45309 0%, #78350f 50%, #f59e0b 100%)",
     bgImage: "https://images.unsplash.com/photo-1567360216669-0260429fec8b?auto=format&fit=crop&w=1080&q=80",
     textColor: "#fffbeb",
@@ -65,6 +71,7 @@ const FESTIVAL_REGISTRY = {
   },
   Christmas: {
     title: "Merry Christmas & Year End Deals",
+    quote: "Wishing you a season of joy, warmth, and wonderful moments. Merry Christmas!",
     gradient: "linear-gradient(135deg, #991b1b 0%, #115e59 50%, #064e3b 100%)",
     bgImage: "https://images.unsplash.com/photo-1512389142860-2949481923db?auto=format&fit=crop&w=1080&q=80",
     textColor: "#ffffff",
@@ -74,6 +81,7 @@ const FESTIVAL_REGISTRY = {
   },
   NewYear: {
     title: "Happy New Year Bash Offers",
+    quote: "Cheers to new beginnings, endless opportunities, and a spectacular New Year!",
     gradient: "linear-gradient(135deg, #000000 0%, #1e293b 50%, #020617 100%)",
     bgImage: "https://images.unsplash.com/photo-1483321580126-77884d619934?auto=format&fit=crop&w=1080&q=80",
     textColor: "#e2e8f0",
@@ -83,6 +91,7 @@ const FESTIVAL_REGISTRY = {
   },
   IndependenceDay: {
     title: "Azadi Freedom Mega Sale",
+    quote: "Proud to be an Indian. Let's celebrate the spirit of freedom and unity!",
     gradient: "linear-gradient(135deg, #c2410c 0%, #ffffff 50%, #15803d 100%)",
     bgImage: "https://images.unsplash.com/photo-1598463959556-324392945d8b?auto=format&fit=crop&w=1080&q=80",
     textColor: "#1e293b",
@@ -92,6 +101,7 @@ const FESTIVAL_REGISTRY = {
   },
   MakarSankranti: {
     title: "Makar Sankranti Kite Festival",
+    quote: "May your life soar high with success like a kite. Happy Makar Sankranti!",
     gradient: "linear-gradient(135deg, #0ea5e9 0%, #38bdf8 50%, #eab308 100%)",
     bgImage: "https://images.unsplash.com/photo-1516089327599-2c7c59db62c9?auto=format&fit=crop&w=1080&q=80",
     textColor: "#ffffff",
@@ -101,6 +111,7 @@ const FESTIVAL_REGISTRY = {
   },
   KarwaChauth: {
     title: "Karwa Chauth Shringar Special",
+    quote: "A celebration of love, devotion, and togetherness. Happy Karwa Chauth!",
     gradient: "linear-gradient(135deg, #7f1d1d 0%, #450a0a 60%, #1e1b4b 100%)",
     bgImage: "https://images.unsplash.com/photo-1511210452655-b4618e7d2358?auto=format&fit=crop&w=1080&q=80",
     textColor: "#fef08a",
@@ -110,6 +121,7 @@ const FESTIVAL_REGISTRY = {
   },
   Janmashtami: {
     title: "Krishna Janmashtami Special",
+    quote: "May Lord Krishna's divine tunes fill your life with eternal bliss and joy.",
     gradient: "linear-gradient(135deg, #1e40af 0%, #0369a1 50%, #065f46 100%)",
     bgImage: "https://images.unsplash.com/photo-1629858547285-0dd5ecf362aa?auto=format&fit=crop&w=1080&q=80",
     textColor: "#fef9c3",
@@ -224,19 +236,31 @@ export default function CanvasEditor({ initialData = {} }) {
 
   // Sync active canvas when festival layout shifts dynamically
   useEffect(() => {
+    const fest = FESTIVAL_REGISTRY[safeFestival];
+    const preset = PRESET_LAYOUTS['Centered'];
+
     setLayers(prev => prev.map(layer => {
-      if (layer.id === 'festive-heading') {
-        return {
-          ...layer,
-          content: FESTIVAL_REGISTRY[safeFestival].title,
-          color: FESTIVAL_REGISTRY[safeFestival].textColor,
-          fontFamily: FESTIVAL_REGISTRY[safeFestival].font
-        };
+      let l = { ...layer };
+      
+      // 1. Update text contents & styles
+      if (l.id === 'festive-heading') {
+        l.content = fest.title;
+        l.color = fest.textColor;
+        l.fontFamily = fest.font;
       }
-      if (layer.id === 'emoji-asset-pack') {
-        return { ...layer, content: FESTIVAL_REGISTRY[safeFestival].emojis.join(' ') };
+      if (l.id === 'emoji-asset-pack') {
+        l.content = fest.emojis.join(' ');
       }
-      return layer;
+      if (l.id === 'marketing-body' && fest.quote) {
+        l.content = fest.quote;
+      }
+
+      // 2. Auto-Snap to Centered Layout
+      if (preset[l.id]) {
+        l = { ...l, ...preset[l.id] };
+      }
+
+      return l;
     }));
   }, [safeFestival]);
 
