@@ -149,6 +149,12 @@ const PRESET_LAYOUTS = {
     'brand-name': { x: 240, y: 380, w: 600, h: 80, textAlign: 'center', fontSize: 32 },
     'festive-heading': { x: 90, y: 480, w: 900, h: 180, textAlign: 'center', fontSize: 64 },
     'marketing-body': { x: 140, y: 680, w: 800, h: 180, textAlign: 'center', fontSize: 28 }
+  },
+  CreativeFloat: {
+    'brand-name': { x: 440, y: 120, w: 550, h: 80, textAlign: 'right', fontSize: 32 },
+    'emoji-asset-pack': { x: 100, y: 160, w: 200, h: 200 },
+    'festive-heading': { x: 140, y: 380, w: 800, h: 220, textAlign: 'center', fontSize: 72 },
+    'marketing-body': { x: 140, y: 650, w: 800, h: 160, textAlign: 'center', fontSize: 28 }
   }
 };
 
@@ -452,6 +458,18 @@ export default function CanvasEditor({ initialData = {} }) {
                   </div>
                   <h3 className="text-sm font-bold text-white">Bottom Heavy</h3>
                   <p className="text-[10px] text-slate-400 mt-1">Hero graphic focus</p>
+                </button>
+                <button onClick={() => applyLayout('CreativeFloat')} className="bg-black/40 hover:bg-white/10 border border-white/5 p-4 rounded-xl text-left transition-all group">
+                  <div className="h-20 w-full bg-white/5 rounded-lg mb-3 flex items-center p-2 gap-2 group-hover:border-indigo-500 border border-transparent">
+                    <div className="w-8 h-8 rounded-full bg-white/20"></div>
+                    <div className="flex-1 flex flex-col gap-1 items-end">
+                      <div className="w-1/2 h-2 bg-white/20 rounded"></div>
+                      <div className="w-full h-8 bg-white/10 rounded mt-1"></div>
+                      <div className="w-3/4 h-3 bg-white/40 rounded mt-1"></div>
+                    </div>
+                  </div>
+                  <h3 className="text-sm font-bold text-white">Creative Float</h3>
+                  <p className="text-[10px] text-slate-400 mt-1">Asymmetric & playful</p>
                 </button>
               </div>
 
