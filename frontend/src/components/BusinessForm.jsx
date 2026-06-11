@@ -16,7 +16,7 @@ export default function BusinessForm({ formData, setFormData, onNext, onBack }) 
     'Toys & Gifts', 'Furniture', 'Cosmetics', 'Sports Goods', 'Eyewear'
   ];
 
-  const festivals = ['Diwali', 'Holi', 'Eid', 'Christmas', 'Independence Day', 'Monsoon Sale', 'New Year'];
+  const festivals = ['Diwali', 'Holi', 'Eid', 'Navratri', 'RakshaBandhan', 'GaneshChaturthi', 'Christmas', 'NewYear', 'IndependenceDay', 'MakarSankranti', 'KarwaChauth', 'Janmashtami'];
 
   const colorPalettes = [
     { name: 'Ocean Blue', hex: '#0ea5e9' },
