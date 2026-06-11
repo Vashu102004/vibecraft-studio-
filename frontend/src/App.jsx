@@ -7,10 +7,10 @@ import { Layers, Home, ArrowLeft } from 'lucide-react';
 export default function App() {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
-    businessName: '',
+    businessName: 'Maa Rewa Auto Parts',
     category: 'Retail',
     festival: 'Diwali',
-    primaryColor: '#ff9800'
+    primaryColor: '#0ea5e9'
   });
 
   return (
