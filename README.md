@@ -5,25 +5,18 @@ VibeCraft Studio is an innovative, **Agentic Development Platform** designed to 
 
 ---
 
-### Microsoft IQ Integration
-Our platform **deeply integrates the Microsoft Foundry IQ concept**.
-Instead of using a generic AI wrapper, we have built a **Model Context Protocol (MCP) Backend** that simulates a connection to an Enterprise Knowledge Graph. 
+## 🏆 1. Hackathon Conditions & Alignment
 
-When a user inputs their business name (e.g., "Maa Rewa Auto Parts"), the system **grounds** the AI by retrieving specific local demographic data, cultural nuances (e.g., Central India market preferences), and brand safety guidelines before any creative generation begins. This ensures that the generated marketing assets are not hallucinated but strictly tailored to the local audience.
+We have strictly adhered to the **Microsoft Agents League Hackathon** conditions for the **Creative Apps Track**:
 
----
-
-### How GitHub Copilot Assisted Me
-This entire application was rapidly developed and scaled using **GitHub Copilot** & **Agentic Workflows**. 
-
-* **Scaffolding the Architecture:** Copilot generated the boilerplate MERN/React folder structure, saving us hours of manual setup.
-* **Canvas Studio Pro Engine:** Advanced math for the Drag & Drop (`react-rnd`) layer positioning, Z-Index management, and Semantic Reflow logic was accelerated through collaborative prompting.
-* **Bug Fixing:** Solved complex React Babel JSX errors, DOM Ghosting from CSS `transform: scale`, and layout overlapping issues via intelligent context.
-* **Creative Prompting:** We used Copilot to synthesize the unique "Hinglish" marketing copy generator that drives our frontend UI.
+* **GitHub Copilot Usage:** The entire MERN architecture, Canvas Drag & Drop math (`react-rnd`), and CSS Grid layout algorithms were rapidly scaffolded and debugged using GitHub Copilot and Copilot Chat.
+* **Agentic Model Context Protocol (MCP):** Instead of a simple prompt wrapper, we built a true **MCP Server Backend**. The frontend communicates with the agentic backend to pull real-time data schemas.
+* **Microsoft Foundry IQ Integration:** Our platform simulates an Enterprise Knowledge Graph. It grounds the AI with local demographic context (e.g., Central India market nuances) to ensure the creative output is culturally accurate and brand-safe, entirely avoiding hallucination.
+* **Creative App Impact:** We solved a real-world problem by enabling zero-tech retail merchants to generate beautiful, High-Res 4K marketing assets instantly without any design skills.
 
 ---
 
-## 🎨 3. Grounded Context & Canvas Pro UX
+## 🎨 2. Grounded Context & Canvas Pro UX
 
 VibeCraft Studio breaks away from standard chat interfaces by offering a **Fully Interactive Canvas Editor**:
 1. **Smart Context:** Select a festival (Diwali, Holi, Eid, Navratri, etc.) and the system instantly updates the background, gradient, premium fonts, and **Smart Quotes** automatically.
