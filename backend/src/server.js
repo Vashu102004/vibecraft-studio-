@@ -108,6 +108,7 @@ async function main() {
 
   app.post('/api/generate', async (req, res) => {
     try {
+      console.error('Frontend request received:', req.body.businessName);
       const { businessName, festival } = req.body;
       const knowledge = await queryFoundryIQKnowledge({ businessName });
       const copyResult = await generateGroundedCopy({
@@ -122,8 +123,8 @@ async function main() {
     }
   });
 
-  app.listen(3000, () => {
-    console.error("🚀 VibeCraft Express Bridge running on port 3000!");
+  app.listen(3000, '127.0.0.1', () => {
+    console.error("🚀 VibeCraft Express Bridge running on 127.0.0.1:3000!");
   });
 }
 
