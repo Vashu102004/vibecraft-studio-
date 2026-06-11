@@ -277,13 +277,13 @@ export default function CanvasEditor({ initialData = {} }) {
   };
 
   const addSticker = (unicode) => {
-    const newId = \`sticker-\${Date.now()}\`;
+    const newId = `sticker-${Date.now()}`;
     setLayers(prev => [
       ...prev,
       {
         id: newId,
         type: 'image',
-        content: \`https://fonts.gstatic.com/s/e/notoemoji/latest/\${unicode}/512.gif\`,
+        content: `https://fonts.gstatic.com/s/e/notoemoji/latest/${unicode}/512.gif`,
         x: 440,
         y: 440,
         w: 200,
@@ -307,7 +307,7 @@ export default function CanvasEditor({ initialData = {} }) {
           cacheBust: true,
         });
         const link = document.createElement('a');
-        link.download = \`VibeCraft_\${safeFestival}_Professional.png\`;
+        link.download = `VibeCraft_${safeFestival}_Professional.png`;
         link.href = dataUrl;
         link.click();
       } catch (error) {
@@ -369,13 +369,13 @@ export default function CanvasEditor({ initialData = {} }) {
           <div className="bg-[#0f1524]/80 backdrop-blur-md p-4 rounded-3xl border border-white/5 shadow-2xl flex gap-2">
             <button 
               onClick={() => setActiveTab('editor')}
-              className={\`flex-1 py-2.5 text-xs font-black tracking-widest uppercase rounded-xl transition-all \${activeTab === 'editor' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/20' : 'text-slate-400 hover:bg-white/5'}\`}
+              className={`flex-1 py-2.5 text-xs font-black tracking-widest uppercase rounded-xl transition-all ${activeTab === 'editor' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/20' : 'text-slate-400 hover:bg-white/5'}`}
             >
               <Sliders size={14} className="inline mr-1.5 -mt-0.5" /> Editor
             </button>
             <button 
               onClick={() => setActiveTab('layouts')}
-              className={\`flex-1 py-2.5 text-xs font-black tracking-widest uppercase rounded-xl transition-all \${activeTab === 'layouts' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/20' : 'text-slate-400 hover:bg-white/5'}\`}
+              className={`flex-1 py-2.5 text-xs font-black tracking-widest uppercase rounded-xl transition-all ${activeTab === 'layouts' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/20' : 'text-slate-400 hover:bg-white/5'}`}
             >
               <LayoutTemplate size={14} className="inline mr-1.5 -mt-0.5" /> Layouts
             </button>
@@ -428,7 +428,7 @@ export default function CanvasEditor({ initialData = {} }) {
                       onClick={() => addSticker(unicode)}
                       className="bg-black/40 hover:bg-white/10 border border-white/5 p-2 rounded-xl flex items-center justify-center transition-all h-20"
                     >
-                      <img src={\`https://fonts.gstatic.com/s/e/notoemoji/latest/\${unicode}/512.gif\`} alt="Sticker" className="w-12 h-12 object-contain drop-shadow-lg" />
+                      <img src={`https://fonts.gstatic.com/s/e/notoemoji/latest/${unicode}/512.gif`} alt="Sticker" className="w-12 h-12 object-contain drop-shadow-lg" />
                     </button>
                   ))}
                 </div>
@@ -465,25 +465,25 @@ export default function CanvasEditor({ initialData = {} }) {
                         {/* Formatting Action Bar */}
                         <div className="bg-black/30 p-1.5 rounded-xl border border-white/5 flex items-center justify-between">
                           <div className="flex gap-1">
-                            <button onClick={() => toggleStyle('fontWeight', '900', 'normal')} className={\`p-2 rounded-lg transition-colors \${activeLayer.fontWeight === '900' ? 'bg-indigo-500 text-white' : 'text-slate-400 hover:text-white hover:bg-white/10'}\`}>
+                            <button onClick={() => toggleStyle('fontWeight', '900', 'normal')} className={`p-2 rounded-lg transition-colors ${activeLayer.fontWeight === '900' ? 'bg-indigo-500 text-white' : 'text-slate-400 hover:text-white hover:bg-white/10'}`}>
                               <Bold size={16} />
                             </button>
-                            <button onClick={() => toggleStyle('fontStyle', 'italic', 'normal')} className={\`p-2 rounded-lg transition-colors \${activeLayer.fontStyle === 'italic' ? 'bg-indigo-500 text-white' : 'text-slate-400 hover:text-white hover:bg-white/10'}\`}>
+                            <button onClick={() => toggleStyle('fontStyle', 'italic', 'normal')} className={`p-2 rounded-lg transition-colors ${activeLayer.fontStyle === 'italic' ? 'bg-indigo-500 text-white' : 'text-slate-400 hover:text-white hover:bg-white/10'}`}>
                               <Italic size={16} />
                             </button>
-                            <button onClick={() => toggleStyle('textDecoration', 'underline', 'none')} className={\`p-2 rounded-lg transition-colors \${activeLayer.textDecoration === 'underline' ? 'bg-indigo-500 text-white' : 'text-slate-400 hover:text-white hover:bg-white/10'}\`}>
+                            <button onClick={() => toggleStyle('textDecoration', 'underline', 'none')} className={`p-2 rounded-lg transition-colors ${activeLayer.textDecoration === 'underline' ? 'bg-indigo-500 text-white' : 'text-slate-400 hover:text-white hover:bg-white/10'}`}>
                               <Underline size={16} />
                             </button>
                           </div>
                           <div className="w-px h-6 bg-white/10"></div>
                           <div className="flex gap-1">
-                            <button onClick={() => updateActiveLayerProperty('textAlign', 'left')} className={\`p-2 rounded-lg transition-colors \${activeLayer.textAlign === 'left' ? 'bg-white/20 text-white' : 'text-slate-400 hover:text-white hover:bg-white/10'}\`}>
+                            <button onClick={() => updateActiveLayerProperty('textAlign', 'left')} className={`p-2 rounded-lg transition-colors ${activeLayer.textAlign === 'left' ? 'bg-white/20 text-white' : 'text-slate-400 hover:text-white hover:bg-white/10'}`}>
                               <AlignLeft size={16} />
                             </button>
-                            <button onClick={() => updateActiveLayerProperty('textAlign', 'center')} className={\`p-2 rounded-lg transition-colors \${activeLayer.textAlign === 'center' ? 'bg-white/20 text-white' : 'text-slate-400 hover:text-white hover:bg-white/10'}\`}>
+                            <button onClick={() => updateActiveLayerProperty('textAlign', 'center')} className={`p-2 rounded-lg transition-colors ${activeLayer.textAlign === 'center' ? 'bg-white/20 text-white' : 'text-slate-400 hover:text-white hover:bg-white/10'}`}>
                               <AlignCenter size={16} />
                             </button>
-                            <button onClick={() => updateActiveLayerProperty('textAlign', 'right')} className={\`p-2 rounded-lg transition-colors \${activeLayer.textAlign === 'right' ? 'bg-white/20 text-white' : 'text-slate-400 hover:text-white hover:bg-white/10'}\`}>
+                            <button onClick={() => updateActiveLayerProperty('textAlign', 'right')} className={`p-2 rounded-lg transition-colors ${activeLayer.textAlign === 'right' ? 'bg-white/20 text-white' : 'text-slate-400 hover:text-white hover:bg-white/10'}`}>
                               <AlignRight size={16} />
                             </button>
                           </div>
@@ -636,16 +636,16 @@ export default function CanvasEditor({ initialData = {} }) {
                     handleSemanticReflow(layer.id, position.x, position.y, parseInt(ref.style.width), parseInt(ref.style.height));
                   }}
                   style={{ zIndex: layer.zIndex }}
-                  className={\`flex items-center justify-start transition-all duration-200 \${
+                  className={`flex items-center justify-start transition-all duration-200 ${
                     activeLayerId === layer.id && !isExporting 
                       ? 'ring-4 ring-indigo-500 shadow-[0_0_30px_rgba(99,102,241,0.5)] bg-indigo-500/10' 
                       : 'hover:ring-2 hover:ring-white/30'
-                  }\`}
+                  }`}
                 >
                   {layer.type === 'text' ? (
                     <div
                       style={{
-                        fontSize: \`\${layer.fontSize}px\`,
+                        fontSize: `${layer.fontSize}px`,
                         color: layer.color,
                         fontFamily: layer.fontFamily,
                         fontWeight: layer.fontWeight,
@@ -667,7 +667,7 @@ export default function CanvasEditor({ initialData = {} }) {
                     </div>
                   ) : (
                     <div
-                      style={{ fontSize: \`\${layer.fontSize || 50}px\`, width: '100%', height: '100%' }}
+                      style={{ fontSize: `${layer.fontSize || 50}px`, width: '100%', height: '100%' }}
                       className="flex items-center justify-center filter drop-shadow-2xl tracking-widest"
                     >
                       {layer.content}
