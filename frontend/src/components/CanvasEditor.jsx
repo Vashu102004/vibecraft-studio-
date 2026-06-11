@@ -133,22 +133,22 @@ const FESTIVAL_REGISTRY = {
 
 const PRESET_LAYOUTS = {
   Centered: {
-    'brand-name': { x: 340, y: 100, w: 400, h: 60, textAlign: 'center' },
-    'festive-heading': { x: 140, y: 220, w: 800, h: 80, textAlign: 'center', fontSize: 60 },
-    'marketing-body': { x: 140, y: 400, w: 800, h: 120, textAlign: 'center', fontSize: 24 },
-    'emoji-asset-pack': { x: 440, y: 650, w: 200, h: 100 }
+    'brand-name': { x: 240, y: 100, w: 600, h: 80, textAlign: 'center', fontSize: 32 },
+    'festive-heading': { x: 90, y: 200, w: 900, h: 180, textAlign: 'center', fontSize: 72 },
+    'marketing-body': { x: 140, y: 420, w: 800, h: 180, textAlign: 'center', fontSize: 30 },
+    'emoji-asset-pack': { x: 440, y: 620, w: 200, h: 120 }
   },
   Split: {
-    'brand-name': { x: 60, y: 80, w: 400, h: 60, textAlign: 'left' },
-    'festive-heading': { x: 60, y: 180, w: 500, h: 120, textAlign: 'left', fontSize: 50 },
-    'marketing-body': { x: 60, y: 350, w: 450, h: 200, textAlign: 'left', fontSize: 20 },
-    'emoji-asset-pack': { x: 600, y: 200, w: 300, h: 200 }
+    'brand-name': { x: 100, y: 120, w: 450, h: 80, textAlign: 'left', fontSize: 32 },
+    'festive-heading': { x: 100, y: 220, w: 550, h: 220, textAlign: 'left', fontSize: 64 },
+    'marketing-body': { x: 100, y: 460, w: 500, h: 200, textAlign: 'left', fontSize: 28 },
+    'emoji-asset-pack': { x: 680, y: 250, w: 250, h: 250 }
   },
   BottomHeavy: {
-    'emoji-asset-pack': { x: 340, y: 100, w: 400, h: 150 },
-    'brand-name': { x: 340, y: 450, w: 400, h: 60, textAlign: 'center' },
-    'festive-heading': { x: 140, y: 550, w: 800, h: 80, textAlign: 'center', fontSize: 50 },
-    'marketing-body': { x: 140, y: 700, w: 800, h: 120, textAlign: 'center', fontSize: 22 }
+    'emoji-asset-pack': { x: 440, y: 160, w: 200, h: 150 },
+    'brand-name': { x: 240, y: 380, w: 600, h: 80, textAlign: 'center', fontSize: 32 },
+    'festive-heading': { x: 90, y: 480, w: 900, h: 180, textAlign: 'center', fontSize: 64 },
+    'marketing-body': { x: 140, y: 680, w: 800, h: 180, textAlign: 'center', fontSize: 28 }
   }
 };
 
@@ -721,7 +721,7 @@ export default function CanvasEditor({ initialData = {} }) {
                         lineHeight: '1.3',
                         textShadow: '0 4px 12px rgba(0,0,0,0.5)'
                       }}
-                      className="p-4 break-words select-none drop-shadow-2xl"
+                      className="px-4 py-1 break-words select-none drop-shadow-2xl flex flex-col justify-center"
                     >
                       {layer.content}
                     </div>
