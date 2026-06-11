@@ -1,9 +1,44 @@
 import React from 'react';
-import { ArrowRight, ArrowLeft, Store, Calendar, Palette } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Store, Calendar, Palette, Briefcase } from 'lucide-react';
 
 export default function BusinessForm({ formData, setFormData, onNext, onBack }) {
-  const categories = ['Retail', 'Fashion', 'Electronics', 'Grocery', 'Restaurant', 'Auto Parts', 'Beauty', 'Pharmacy'];
+  const businessNames = [
+    '', 'Maa Rewa Auto Parts', 'Sharma Sweets & Namkeen', 'Verma Electronics', 'Gupta General Store', 'Royal Fashion Hub',
+    'Shri Ram Cloth Market', 'Balaji Mobile Shop', 'Lakshmi Jewellers', 'Aggarwal Pharmacy', 'Yadav Dairy & Sweets',
+    'Krishna Textiles', 'New Bharat Traders', 'Singh Hardware Store', 'Jain Book Depot', 'Patel Grocery Mart',
+    'Arora Beauty Parlour', 'Chaudhary Tyres', 'Mishra Book Stall', 'Khandelwal Steel Traders', 'Sai Baba Gift Centre'
+  ];
+
+  const categories = [
+    '', 'Retail', 'Fashion', 'Electronics', 'Grocery', 'Restaurant', 'Auto Parts', 'Beauty', 'Pharmacy',
+    'Hardware', 'Jewellery', 'Books & Stationery', 'Footwear', 'Mobile & Accessories', 'Dairy Products', 'Sweets & Bakery',
+    'Toys & Gifts', 'Furniture', 'Cosmetics', 'Sports Goods', 'Eyewear'
+  ];
+
   const festivals = ['Diwali', 'Holi', 'Eid', 'Christmas', 'Independence Day', 'Monsoon Sale', 'New Year'];
+
+  const colorPalettes = [
+    { name: 'Ocean Blue', hex: '#0ea5e9' },
+    { name: 'Midnight Blue', hex: '#191970' },
+    { name: 'Emerald Green', hex: '#10b981' },
+    { name: 'Forest Green', hex: '#228b22' },
+    { name: 'Sunset Orange', hex: '#f97316' },
+    { name: 'Royal Purple', hex: '#7e22ce' },
+    { name: 'Magenta Pink', hex: '#d946ef' },
+    { name: 'Crimson Red', hex: '#dc2626' },
+    { name: 'Gold Rush', hex: '#fbbf24' },
+    { name: 'Sunflower Yellow', hex: '#eab308' },
+    { name: 'Teal Breeze', hex: '#14b8a6' },
+    { name: 'Cyberpunk Neon', hex: '#ec4899' },
+    { name: 'Lavender Mist', hex: '#a855f7' },
+    { name: 'Coral Reef', hex: '#f43f5e' },
+    { name: 'Indigo Night', hex: '#4f46e5' },
+    { name: 'Mint Fresh', hex: '#34d399' },
+    { name: 'Ruby Red', hex: '#9f1239' },
+    { name: 'Sapphire Blue', hex: '#1d4ed8' },
+    { name: 'Tangerine Dream', hex: '#ea580c' },
+    { name: 'Charcoal Black', hex: '#333333' }
+  ];
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,33 +59,35 @@ export default function BusinessForm({ formData, setFormData, onNext, onBack }) 
             <label className="flex items-center text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
               <Store className="w-4 h-4 mr-2 text-cyan-400" /> Business Name
             </label>
-            <input 
-              type="text" 
-              placeholder="e.g. Maa Rewa Auto Parts"
+            <select 
               value={formData.businessName} 
               onChange={(e) => setFormData({...formData, businessName: e.target.value})} 
-              className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all" 
-              required 
-            />
+              className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all appearance-none" 
+              required
+            >
+              <option value="" disabled hidden>-- Select a Business Name --</option>
+              {businessNames.filter(name => name !== '').map(name => (
+                <option key={name} value={name}>{name}</option>
+              ))}
+            </select>
           </div>
 
           {/* Category */}
           <div>
             <label className="flex items-center text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
-              <Store className="w-4 h-4 mr-2 text-purple-400" /> Category
+              <Briefcase className="w-4 h-4 mr-2 text-purple-400" /> Category
             </label>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-              {categories.map(cat => (
-                <button
-                  key={cat}
-                  type="button"
-                  onClick={() => setFormData({...formData, category: cat})}
-                  className={`py-2 px-3 text-xs font-semibold rounded-lg border transition-all ${formData.category === cat ? 'bg-purple-500/20 border-purple-500 text-purple-300' : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'}`}
-                >
-                  {cat}
-                </button>
+            <select 
+              value={formData.category} 
+              onChange={(e) => setFormData({...formData, category: e.target.value})} 
+              className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all appearance-none" 
+              required
+            >
+              <option value="" disabled hidden>-- Select a Category --</option>
+              {categories.filter(cat => cat !== '').map(cat => (
+                <option key={cat} value={cat}>{cat}</option>
               ))}
-            </div>
+            </select>
           </div>
 
           {/* Festival / Theme */}
@@ -78,19 +115,22 @@ export default function BusinessForm({ formData, setFormData, onNext, onBack }) 
               <Palette className="w-4 h-4 mr-2 text-rose-400" /> Primary Brand Color
             </label>
             <div className="flex items-center space-x-4 bg-black/50 border border-white/10 rounded-xl p-3">
-              <input 
-                type="color" 
-                value={formData.primaryColor} 
-                onChange={(e) => setFormData({...formData, primaryColor: e.target.value})} 
-                className="w-12 h-12 rounded cursor-pointer bg-transparent border-none p-0" 
-              />
+              <div 
+                className="w-12 h-12 rounded cursor-pointer border border-white/20 shadow-inner" 
+                style={{ backgroundColor: formData.primaryColor || '#0ea5e9' }}
+              ></div>
               <div className="flex-1">
-                <input 
-                  type="text" 
-                  value={formData.primaryColor} 
+                <select 
+                  value={formData.primaryColor || '#0ea5e9'} 
                   onChange={(e) => setFormData({...formData, primaryColor: e.target.value})} 
-                  className="w-full bg-transparent border-none text-white font-mono text-sm focus:outline-none uppercase" 
-                />
+                  className="w-full bg-transparent border-none text-white font-medium text-sm focus:outline-none appearance-none cursor-pointer" 
+                >
+                  {colorPalettes.map(palette => (
+                    <option key={palette.hex} value={palette.hex} className="bg-slate-900">
+                      {palette.name}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
           </div>
