@@ -5,13 +5,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Download, Type, Move, Palette, Layers, Sparkles, Sliders, Maximize2, 
   Bold, Italic, Underline, AlignLeft, AlignCenter, AlignRight, 
-  ArrowUpToLine, ArrowDownToLine, Trash2, LayoutTemplate, Image as ImageIcon
+  ArrowUpToLine, ArrowDownToLine, Trash2, LayoutTemplate, Image as ImageIcon, Square
 } from 'lucide-react';
 
 const FESTIVAL_REGISTRY = {
   Diwali: {
     title: "Shubh Deepawali Special",
     gradient: "linear-gradient(135deg, #0f172a 0%, #3b0764 50%, #1e1b4b 100%)",
+    bgImage: "https://images.unsplash.com/photo-1542157585-ef208ce528f4?auto=format&fit=crop&w=1080&q=80",
     textColor: "#fcd34d",
     emojis: ["🪔", "🎆", "✨", "🌟"],
     stickers: ["1fa94", "2728"],
@@ -20,6 +21,7 @@ const FESTIVAL_REGISTRY = {
   Holi: {
     title: "Holi Hungama Dhamaka",
     gradient: "linear-gradient(135deg, #db2777 0%, #9333ea 50%, #f59e0b 100%)",
+    bgImage: "https://images.unsplash.com/photo-1554032115-3841c1921319?auto=format&fit=crop&w=1080&q=80",
     textColor: "#ffffff",
     emojis: ["🎨", "🪣", "🔫", "🥳"],
     stickers: ["1f3a8", "1f973"],
@@ -28,6 +30,7 @@ const FESTIVAL_REGISTRY = {
   Eid: {
     title: "Eid Mubarak Mega Sale",
     gradient: "linear-gradient(135deg, #064e3b 0%, #022c22 60%, #115e59 100%)",
+    bgImage: "https://images.unsplash.com/photo-1564507004663-b6dfb3c824d5?auto=format&fit=crop&w=1080&q=80",
     textColor: "#fef08a",
     emojis: ["🌙", "🕌", "✨", "🎁"],
     stickers: ["1f319", "2728"],
@@ -36,6 +39,7 @@ const FESTIVAL_REGISTRY = {
   Navratri: {
     title: "Dandiya Beats Utsav",
     gradient: "linear-gradient(135deg, #1e3a8a 0%, #c2410c 70%, #7c2d12 100%)",
+    bgImage: "https://images.unsplash.com/photo-1600085811342-9ee684176cc3?auto=format&fit=crop&w=1080&q=80",
     textColor: "#fdba74",
     emojis: ["🪘", "💃", "🔱", "🏹"],
     stickers: ["1f483", "2728"],
@@ -44,6 +48,7 @@ const FESTIVAL_REGISTRY = {
   RakshaBandhan: {
     title: "Rakhi Special Bandhan Offers",
     gradient: "linear-gradient(135deg, #881337 0%, #4c0519 60%, #9d174d 100%)",
+    bgImage: "https://images.unsplash.com/photo-1596489376483-e18e88e235e1?auto=format&fit=crop&w=1080&q=80",
     textColor: "#fce7f3",
     emojis: ["🧵", "🎁", "👑", "🍬"],
     stickers: ["1f381", "1f451"],
@@ -52,6 +57,7 @@ const FESTIVAL_REGISTRY = {
   GaneshChaturthi: {
     title: "Ganesh Utsav Maha Sale",
     gradient: "linear-gradient(135deg, #b45309 0%, #78350f 50%, #f59e0b 100%)",
+    bgImage: "https://images.unsplash.com/photo-1567360216669-0260429fec8b?auto=format&fit=crop&w=1080&q=80",
     textColor: "#fffbeb",
     emojis: ["🐘", "🏵️", "🪵", "🍫"],
     stickers: ["1f418", "2728"],
@@ -60,6 +66,7 @@ const FESTIVAL_REGISTRY = {
   Christmas: {
     title: "Merry Christmas & Year End Deals",
     gradient: "linear-gradient(135deg, #991b1b 0%, #115e59 50%, #064e3b 100%)",
+    bgImage: "https://images.unsplash.com/photo-1512389142860-2949481923db?auto=format&fit=crop&w=1080&q=80",
     textColor: "#ffffff",
     emojis: ["🎄", "🎅", "❄️", "🎁"],
     stickers: ["1f384", "1f381"],
@@ -68,6 +75,7 @@ const FESTIVAL_REGISTRY = {
   NewYear: {
     title: "Happy New Year Bash Offers",
     gradient: "linear-gradient(135deg, #000000 0%, #1e293b 50%, #020617 100%)",
+    bgImage: "https://images.unsplash.com/photo-1483321580126-77884d619934?auto=format&fit=crop&w=1080&q=80",
     textColor: "#e2e8f0",
     emojis: ["🥂", "🎆", "🎈", "🥳"],
     stickers: ["1f386", "1f389"],
@@ -76,6 +84,7 @@ const FESTIVAL_REGISTRY = {
   IndependenceDay: {
     title: "Azadi Freedom Mega Sale",
     gradient: "linear-gradient(135deg, #c2410c 0%, #ffffff 50%, #15803d 100%)",
+    bgImage: "https://images.unsplash.com/photo-1598463959556-324392945d8b?auto=format&fit=crop&w=1080&q=80",
     textColor: "#1e293b",
     emojis: ["🇮🇳", "🫡", "🕊️", "🦅"],
     stickers: ["1f1e9_1f1f3", "1f985"],
@@ -84,6 +93,7 @@ const FESTIVAL_REGISTRY = {
   MakarSankranti: {
     title: "Makar Sankranti Kite Festival",
     gradient: "linear-gradient(135deg, #0ea5e9 0%, #38bdf8 50%, #eab308 100%)",
+    bgImage: "https://images.unsplash.com/photo-1516089327599-2c7c59db62c9?auto=format&fit=crop&w=1080&q=80",
     textColor: "#ffffff",
     emojis: ["🪁", "🌾", "🪵", "☀️"],
     stickers: ["1fa81", "2600"],
@@ -92,6 +102,7 @@ const FESTIVAL_REGISTRY = {
   KarwaChauth: {
     title: "Karwa Chauth Shringar Special",
     gradient: "linear-gradient(135deg, #7f1d1d 0%, #450a0a 60%, #1e1b4b 100%)",
+    bgImage: "https://images.unsplash.com/photo-1511210452655-b4618e7d2358?auto=format&fit=crop&w=1080&q=80",
     textColor: "#fef08a",
     emojis: ["🌙", "💍", "💅", "🌹"],
     stickers: ["1f48d", "1f319"],
@@ -100,6 +111,7 @@ const FESTIVAL_REGISTRY = {
   Janmashtami: {
     title: "Krishna Janmashtami Special",
     gradient: "linear-gradient(135deg, #1e40af 0%, #0369a1 50%, #065f46 100%)",
+    bgImage: "https://images.unsplash.com/photo-1629858547285-0dd5ecf362aa?auto=format&fit=crop&w=1080&q=80",
     textColor: "#fef9c3",
     emojis: ["🦚", "🍯", "🪈", "🪵"],
     stickers: ["1f9da", "2728"],
@@ -140,6 +152,7 @@ export default function CanvasEditor({ initialData = {} }) {
   const [activeLayerId, setActiveLayerId] = useState(null);
   const [isExporting, setIsExporting] = useState(false);
   const [activeTab, setActiveTab] = useState('editor'); // 'editor', 'layouts'
+  const [showFrame, setShowFrame] = useState(true);
 
   // Core Layers Initialization
   const [layers, setLayers] = useState([
@@ -578,6 +591,9 @@ export default function CanvasEditor({ initialData = {} }) {
                           <ArrowDownToLine size={14} /> Backward
                         </button>
                       </div>
+                      <button onClick={() => setShowFrame(!showFrame)} className={"w-full flex items-center justify-center gap-2 " + (showFrame ? "bg-indigo-500/20 text-indigo-400 border-indigo-500/30" : "bg-white/5 text-slate-400 border-white/10") + " hover:bg-white/10 text-xs font-bold py-2.5 rounded-xl border transition-all mt-4"}>
+                        <Square size={14} /> {showFrame ? 'Frame Enabled' : 'Frame Disabled'}
+                      </button>
                       <button onClick={deleteActiveLayer} className="w-full flex items-center justify-center gap-2 bg-red-500/10 hover:bg-red-500/20 text-red-400 text-xs font-bold py-2.5 rounded-xl border border-red-500/20 transition-all mt-2">
                         <Trash2 size={14} /> Delete Layer
                       </button>
@@ -614,10 +630,34 @@ export default function CanvasEditor({ initialData = {} }) {
               }}
               className="relative overflow-hidden shadow-2xl select-none mx-auto rounded-xl"
             >
+              {/* Premium Background Image with Blend */}
+              {FESTIVAL_REGISTRY[safeFestival].bgImage && (
+                <div 
+                  className="absolute inset-0 opacity-40 mix-blend-overlay pointer-events-none"
+                  style={{ 
+                    backgroundImage: "url('" + FESTIVAL_REGISTRY[safeFestival].bgImage + "')", 
+                    backgroundSize: 'cover', 
+                    backgroundPosition: 'center' 
+                  }}
+                ></div>
+              )}
+
+              {/* Boundary / Frame Design */}
+              {showFrame && (
+                <div className="absolute inset-8 border-[6px] border-white/20 pointer-events-none rounded-2xl z-50 shadow-inner">
+                  <div className="absolute inset-2 border-2 border-white/40 rounded-xl"></div>
+                  {/* Corner Accents */}
+                  <div className="absolute -top-2 -left-2 w-8 h-8 border-t-[6px] border-l-[6px] border-[#fcd34d]/80 rounded-tl-xl drop-shadow-md"></div>
+                  <div className="absolute -top-2 -right-2 w-8 h-8 border-t-[6px] border-r-[6px] border-[#fcd34d]/80 rounded-tr-xl drop-shadow-md"></div>
+                  <div className="absolute -bottom-2 -left-2 w-8 h-8 border-b-[6px] border-l-[6px] border-[#fcd34d]/80 rounded-bl-xl drop-shadow-md"></div>
+                  <div className="absolute -bottom-2 -right-2 w-8 h-8 border-b-[6px] border-r-[6px] border-[#fcd34d]/80 rounded-br-xl drop-shadow-md"></div>
+                </div>
+              )}
+
               {/* Professional Background Overlays */}
               <div className="absolute inset-0 opacity-[0.05] pointer-events-none mix-blend-overlay" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '40px 40px' }}></div>
-              <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-black/40 to-transparent pointer-events-none"></div>
-              <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div>
+              <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-black/50 to-transparent pointer-events-none"></div>
+              <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-black/70 to-transparent pointer-events-none"></div>
 
               {layers.map((layer) => (
                 <Rnd
