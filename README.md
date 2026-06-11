@@ -1,7 +1,7 @@
-# VibeCraft Agent Studio 🚀
+# VibeCraft Studio Pro 2.0 🚀
 **Built for the Microsoft Agents League Hackathon — Creative Apps Track**
 
-VibeCraft Studio is an innovative, **Agentic Development Platform** designed to empower local retail merchants. It acts as an intelligent creative layer that orchestrates multiple agentic tools to generate culturally grounded marketing copy and responsive, asset-free HTML/CSS layouts.
+VibeCraft Studio is an innovative, **Agentic Development Platform** designed to empower local retail merchants. It acts as an intelligent creative layer that orchestrates multiple agentic tools to generate culturally grounded marketing copy and responsive, dynamic visual layouts.
 
 ---
 
@@ -14,22 +14,22 @@ When a user inputs their business name (e.g., "Maa Rewa Auto Parts"), the system
 ---
 
 ### How GitHub Copilot Assisted Me
-This entire application was rapidly developed and scaled using **GitHub Copilot**. 
+This entire application was rapidly developed and scaled using **GitHub Copilot** & **Agentic Workflows**. 
 
 * **Scaffolding the Architecture:** Copilot generated the boilerplate MERN/React folder structure, saving us hours of manual setup.
-* **Complex Logic Implementation:** Copilot Chat helped design the `LivePreview` CSS rendering logic, ensuring that the dark themes, dynamic colors, and SVG/emoji cartoon graphics correctly adapt to the selected festival state in React.
-* **Bug Fixing:** When integrating Tailwind CSS v4 with Vite, Copilot diagnosed and resolved dependency conflicts.
-* **Creative Prompting:** We used Copilot to switch context models and synthesize the unique "Hinglish" marketing copy generator that drives our frontend UI.
+* **Canvas Studio Pro Engine:** Advanced math for the Drag & Drop (`react-rnd`) layer positioning, Z-Index management, and Semantic Reflow logic was accelerated through collaborative prompting.
+* **Bug Fixing:** Solved complex React Babel JSX errors, DOM Ghosting from CSS `transform: scale`, and layout overlapping issues via intelligent context.
+* **Creative Prompting:** We used Copilot to synthesize the unique "Hinglish" marketing copy generator that drives our frontend UI.
 
 ---
 
-## 🎨 3. Grounded Context & Creative UX
+## 🎨 3. Grounded Context & Canvas Pro UX
 
-VibeCraft Studio breaks away from standard chat interfaces by offering a **3-Step Magic Wizard**:
-1. **Context First:** The user selects their business name, category, and festival theme.
-2. **Personalized Grounding:** The AI doesn't just return generic text; it synthesizes *Hinglish* copy (e.g., "Shubh Diwali Alert from Maa Rewa Auto Parts!") specifically optimized for the chosen category and Indian local markets.
-3. **Dynamic Output:** A lightweight, asset-free HTML/CSS banner is live-rendered based on the exact context.
-4. **Actionable UX:** One-click WhatsApp export and HTML source copy make the platform incredibly easy for non-technical shop owners to use immediately.
+VibeCraft Studio breaks away from standard chat interfaces by offering a **Fully Interactive Canvas Editor**:
+1. **Smart Context:** Select a festival (Diwali, Holi, Eid, Navratri, etc.) and the system instantly updates the background, gradient, premium fonts, and **Smart Quotes** automatically.
+2. **Pre-Built Auto Layouts:** Don't know how to design? Choose from 4 auto-snapping layouts: *Modern Centered, Classic Split, Bottom Heavy, and Creative Float*. The canvas elements instantly align themselves beautifully.
+3. **Drag & Drop Editing:** Absolute freedom. Move texts, toggle premium frames, add dynamic animated emoji stickers, and arrange layers.
+4. **4K High-Res Export:** Generate professional, razor-sharp posters mapped pixel-to-pixel ready for WhatsApp marketing.
 
 ---
 
@@ -44,7 +44,7 @@ Security is paramount. We have ensured that:
 
 ## 🛠️ Architecture & Tech Stack
 
-- **Frontend:** React.js, Vite, Tailwind CSS v4, Lucide Icons, Canvas-Confetti (Multi-step UI)
+- **Frontend:** React.js, Vite, Tailwind CSS v4, Lucide Icons, `react-rnd` (Drag & Drop), `html-to-image`
 - **Backend:** Node.js, Express.js, Model Context Protocol (MCP) SDK
 - **Intelligence Layer:** Microsoft Foundry IQ integration for contextual grounding.
 
@@ -53,16 +53,16 @@ Security is paramount. We have ensured that:
 ## 🚀 Quick Start Guide
 
 ### 1. Start the Backend
-\`\`\`bash
+```bash
 cd backend
 npm install
 npm start
-\`\`\`
+```
 
 ### 2. Start the Frontend
-\`\`\`bash
+```bash
 cd frontend
 npm install
 npm run dev
-\`\`\`
+```
 Navigate to `http://localhost:5173`.
