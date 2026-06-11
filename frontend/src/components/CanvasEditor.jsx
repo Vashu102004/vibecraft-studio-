@@ -743,6 +743,7 @@ export default function CanvasEditor({ initialData = {} }) {
                 </Rnd>
               ))}
             </div>
+            </div>
           </div>
         </div>
 
