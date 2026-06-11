@@ -340,7 +340,8 @@ export default function CanvasEditor({ initialData = {} }) {
       try {
         const dataUrl = await toPng(canvasRef.current, {
           quality: 1.0,
-          pixelRatio: 3, 
+          pixelRatio: 1, 
+          style: { transform: 'scale(1)' },
           cacheBust: true,
         });
         const link = document.createElement('a');
@@ -402,7 +403,7 @@ export default function CanvasEditor({ initialData = {} }) {
       <div className="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
         {/* Left Toolbar (Myntra/Canva Style Floating Panels) */}
-        <div className="lg:col-span-3 space-y-6">
+        <div className="lg:col-span-3 space-y-6 lg:max-h-[850px] overflow-y-auto overflow-x-hidden pr-2 scrollbar-thin scrollbar-thumb-white/10">
           <div className="bg-[#0f1524]/80 backdrop-blur-md p-4 rounded-3xl border border-white/5 shadow-2xl flex gap-2">
             <button 
               onClick={() => setActiveTab('editor')}
@@ -641,19 +642,21 @@ export default function CanvasEditor({ initialData = {} }) {
         {/* Center Canvas */}
         <div className="lg:col-span-9 flex justify-center items-start">
           <div className="p-4 bg-[#0f1524]/60 backdrop-blur-md rounded-3xl border border-white/5 shadow-2xl">
-            <div 
-              ref={canvasRef}
-              id="vibecraft-render-core"
-              onClick={() => setActiveLayerId(null)}
-              style={{ 
-                background: FESTIVAL_REGISTRY[safeFestival].gradient,
-                width: '1080px', // Standard 1:1 Instagram Post Size Scaled
-                height: '1080px',
-                transform: 'scale(0.55)', // Scale down for view
-                transformOrigin: 'top center'
-              }}
-              className="relative overflow-hidden shadow-2xl select-none mx-auto rounded-xl"
-            >
+            {/* Bounding Box to prevent Transform Scale DOM Ghosting */}
+            <div style={{ width: '594px', height: '594px' }} className="relative">
+              <div 
+                ref={canvasRef}
+                id="vibecraft-render-core"
+                onClick={() => setActiveLayerId(null)}
+                style={{ 
+                  background: FESTIVAL_REGISTRY[safeFestival].gradient,
+                  width: '1080px', // Standard 1:1 Instagram Post Size Scaled
+                  height: '1080px',
+                  transform: 'scale(0.55)', // Scale down for view (594px visual)
+                  transformOrigin: 'top left'
+                }}
+                className="absolute top-0 left-0 overflow-hidden shadow-2xl select-none rounded-xl"
+              >
               {/* Premium Background Image with Blend */}
               {FESTIVAL_REGISTRY[safeFestival].bgImage && (
                 <div 
