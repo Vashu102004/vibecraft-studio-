@@ -5,8 +5,7 @@ VibeCraft Studio is an innovative, **Agentic Development Platform** designed to 
 
 ---
 
-## 🌟 1. Microsoft Foundry IQ Integration (Crucial)
-
+### Microsoft IQ Integration
 Our platform **deeply integrates the Microsoft Foundry IQ concept**.
 Instead of using a generic AI wrapper, we have built a **Model Context Protocol (MCP) Backend** that simulates a connection to an Enterprise Knowledge Graph. 
 
@@ -14,8 +13,7 @@ When a user inputs their business name (e.g., "Maa Rewa Auto Parts"), the system
 
 ---
 
-## 🤖 2. How GitHub Copilot Helped Us (Usage Log)
-
+### How GitHub Copilot Assisted Me
 This entire application was rapidly developed and scaled using **GitHub Copilot**. 
 
 * **Scaffolding the Architecture:** Copilot generated the boilerplate MERN/React folder structure, saving us hours of manual setup.

@@ -11,14 +11,15 @@ export default function HeroSection({ onStart }) {
         <Sparkles className="w-4 h-4 text-cyan-400" />
         <span className="text-xs font-semibold text-cyan-100 tracking-wide uppercase">VibeCraft Studio 2.0</span>
       </div>
-      
-      <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 text-white drop-shadow-lg">
-        AI-Powered Marketing <br className="hidden md:block" /> for Local Brands
-      </h1>
-      
-      <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto mb-12 leading-relaxed font-medium">
-        Turn your business name into high-converting, culturally grounded marketing banners and Hinglish copy in seconds. No design skills needed.
-      </p>
+      <div className="bg-white/95 backdrop-blur-xl px-8 py-10 md:px-12 md:py-12 rounded-[2.5rem] shadow-[0_0_60px_rgba(255,255,255,0.15)] border border-white mb-10 max-w-4xl mx-auto relative z-10">
+        <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 text-transparent bg-clip-text bg-gradient-to-br from-black via-blue-950 to-gray-800 drop-shadow-sm">
+          AI-Powered Marketing <br className="hidden md:block" /> for Local Brands
+        </h1>
+        
+        <p className="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto leading-relaxed font-semibold">
+          Turn your business name into high-converting, culturally grounded marketing banners and Hinglish copy in seconds. No design skills needed.
+        </p>
+      </div>
 
       <div className="flex flex-col sm:flex-row items-center gap-4 z-10">
         <button 
