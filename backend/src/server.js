@@ -3,6 +3,8 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
 import { queryFoundryIQKnowledge, generateGroundedCopy, renderCssCanvas } from "./tools/designTools.js";
 import dotenv from "dotenv";
+import express from "express";
+import cors from "cors";
 
 // Load environment variables (.env file se keys read karne ke liye)
 dotenv.config();
@@ -98,6 +100,31 @@ async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
   console.error("🚀 VibeCraft Agentic MCP Server (Foundry IQ Enabled) is fully operational on stdio!");
+
+  // Start Express HTTP Bridge for Frontend
+  const app = express();
+  app.use(cors());
+  app.use(express.json());
+
+  app.post('/api/generate', async (req, res) => {
+    try {
+      const { businessName, festival } = req.body;
+      const knowledge = await queryFoundryIQKnowledge({ businessName });
+      const copyResult = await generateGroundedCopy({
+        businessName,
+        eventType: festival,
+        brandVoice: knowledge.content[0].text
+      });
+      res.json({ text: copyResult.content[0].text });
+    } catch (error) {
+      console.error('Express Error:', error);
+      res.status(500).json({ error: 'Failed to generate copy' });
+    }
+  });
+
+  app.listen(3000, () => {
+    console.error("🚀 VibeCraft Express Bridge running on port 3000!");
+  });
 }
 
 main().catch((error) => {
